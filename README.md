@@ -6,7 +6,7 @@ Welcome to the homepage of TestRefiner! This the implementation of our research 
 
 TestRefiner is a novel refinement technique that enhances the quality of unit test examples by splitting a complex test into a group of purified ones and improving their textual clarity through a combination of LLMs and program analysis. We first design a test purification component in TestRefiner to simplify complex unit tests, yielding a set of purified tests. We then improve the textual clarity of these purified tests using a program-analysis-enhanced method. This method combines program analysis with the LLMs’ exceptional code comprehension capability, adding essential comments and generating more appropriate identifiers. By doing so, we minimize the influence of LLMs’ hallucinations. Figure 1 shows an overview of TestRefiner.
 
-![Overview of TestRefiner](/Users/yangchen/Library/Application%20Support/typora-user-images/image-20241104231907590.png)
+![Overview of TestRefiner](./figs/overview.pdf)
 
 <p align="center">Figure 1: Overview of TestRefiner</p>
 
