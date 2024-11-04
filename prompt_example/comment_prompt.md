@@ -10,6 +10,7 @@ public void testReplace_StrMatcher_String_int_int_int_VaryMatcher() {
 Do not change the origin statement and structure. Add comments without changing any code.
 
 ## Response
+```
 /**
  * Tests the {@code replace} method of {@code StrBuilder} with varying matchers.
  * This test verifies that the replace operation works correctly when using a specific
@@ -29,6 +30,7 @@ public void testReplace_StrMatcher_String_int_int_int_VaryMatcher() {
     // Assert
     assertEquals("", sb.toString());
 }
+```
 
 ## Instruction
 Please add comments following the 'Arrange-Act-Assert' pattern which explains what is happening and the intentions of what is being done, and add docstring for the test. The test case is:
