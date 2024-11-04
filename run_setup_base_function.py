@@ -122,11 +122,11 @@ if __name__ == "__main__":
     # get current date using time
     date = time.strftime("%Y-%m-%d", time.localtime())
     
-    log_file = f'{code_base}/data/logs/set_up_base_function_d4j_{date}_test.log'
+    log_file = f'{code_base}/data/logs/set_up_base_function_d4j_{date}.log'
     if os.path.exists(log_file):
         os.system(f'rm -rf {log_file}')
     
-    base_res_dir = f'{code_base}/data/d4j_base_function_{date}_test'
+    base_res_dir = f'{code_base}/data/d4j_base_function_{date}'
     if os.path.exists(base_res_dir):
         os.system(f'rm -rf {base_res_dir}')
     os.makedirs(base_res_dir, exist_ok=True)
@@ -200,96 +200,3 @@ if __name__ == "__main__":
                     result = {'compile': single_refined_test_function.compiled, 'timed_out': single_refined_test_function.timeout, 'passed': single_refined_test_function.passed, 'syntax_error': single_refined_test_function.syntax_error, 'test_signature': single_refined_test_function.test_method_signature}
                     json.dump(result, f)
                     f.write('\n')
-
-    # error_info_path = os.path.join(code_base, 'data', 'error_info.jsonl')
-    # success_info_path = os.path.join(code_base, 'data', 'success_info.jsonl')
-    # for cnt_index, single_base_function in enumerate(selected_test_functions):
-    #     logger.debug(f'Processing {single_base_function.function_id}, {cnt_index} / {len(selected_test_functions)}')
-        
-    #     proj_id = single_base_function.project_id
-    #     bug_id = single_base_function.bug_id
-        
-    #     save_dir = os.path.join(evo_base_res_dir, f'{proj_id}_{bug_id}')
-    #     os.makedirs(save_dir, exist_ok=True)
-        
-    #     # 构造一个 tmp dir
-    #     diff_id = generate_random_string(16)
-    #     tmp_execution_base = os.path.join(execution_tmp_dir, date + '_' + diff_id)
-    #     os.makedirs(tmp_execution_base, exist_ok=True)
-
-    #     # get checkout path and add dependency
-    #     proj_dir =os.path.join(tmp_execution_base, f'{proj_id}_{str(bug_id)}', 'fixed')
-
-    #     if not os.path.exists(proj_dir):
-    #         cmd = ['defects4j', 'checkout', '-p', proj_id, '-v', str(bug_id) + 'f', '-w', proj_dir]
-    #         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        
-    #     add_dependencies(tmp_execution_base, f'{proj_id}_{bug_id}')
-        
-    #     # NOTE:直接利用原本的测试类内容
-    #     test_location = os.path.join(proj_dir, single_base_function.location)
-    #     test_class_content = single_base_function.source
-    #     test_content = single_base_function.function_content
-    #     test_method_signature = single_base_function.testmethods[0]
-
-    #     # NOTE: return compiled, timed_out, passed, syntax_error, coverage_info, other output
-    #     compiled, timed_out, passed, syntax_error, coverage_info, line_coverage, condition_coverage, error_result = run_test(test_class_content, proj_dir,test_method_signature)
-        
-    #     if error_result['error_type'] is not None:
-    #         with open(error_info_path, 'a') as f:
-    #             json.dump(error_result, f)
-    #             f.write('\n')
-    #     else:
-    #         with open(success_info_path, 'a') as f:
-    #             result = {'compile': compiled, 'timed_out': timed_out, 'passed': passed, 'syntax_error': syntax_error, 'test_signature': test_method_signature}
-    #             json.dump(result, f)
-    #             f.write('\n')
-
-    #     single_base_function.coverage_info = coverage_info
-    #     single_base_function.set_execution_res(compiled, passed, syntax_error, timed_out, line_coverage, condition_coverage)
-
-
-    #     for single_refined_test_content in single_base_function.refined_test_function_contents:
-    #         # 构造新的测试类的内容
-    #         add_test_content = single_refined_test_content
-    #         add_method_name = get_method_name(add_test_content)
-    #         new_test_method_signature, new_test_location, new_test_content = assemble_test(test_location, test_method_signature, test_class_content, test_content, add_test_content, add_method_name, diff_id)
-    #         write_test(new_test_content, new_test_location)
-
-    #         # 进行测试，return compiled, timed_out, passed, syntax_error, coverage_info, other output
-    #         compiled, timed_out, passed, syntax_error, coverage_info, line_coverage, condition_coverage, error_result = run_test(new_test_content, proj_dir,new_test_method_signature)
-            
-    #         delete_test_file(new_test_location)
-            
-    #         if error_result['error_type'] is not None:
-    #             with open(error_info_path, 'a') as f:
-    #                 json.dump(error_result, f)
-    #                 f.write('\n')
-    #         else:
-    #             with open(success_info_path, 'a') as f:
-    #                 result = {'compile': compiled, 'timed_out': timed_out, 'passed': passed, 'syntax_error': syntax_error, 'test_signature': new_test_method_signature}
-    #                 json.dump(result, f)
-    #                 f.write('\n')
-
-    #         new_test_function = single_base_function.copy_self(function_content=single_refined_test_content, coverage_info=coverage_info)
-    #         new_test_function.set_execution_res(compiled, passed, syntax_error, timed_out, line_coverage, condition_coverage)
-    #         single_base_function.add_refined_test_function(new_test_function)
-        
-
-    #     logger.debug(f"{'='*10} {datetime.datetime.now()} {'='*10}")
-    #     logger.debug(f"Finished {single_base_function.function_id}")
-    #     used_time = (time.time() - start_time)
-    #     hour = int(used_time / 3600)
-    #     minute = int((used_time % 3600) / 60)
-    #     second = int(used_time % 60)
-    #     logger.debug(f"Used Time Cost: {hour}h {minute}m {second}s")
-    #     total_time = (time.time() - start_time) / (cnt_index+1) * len(selected_test_functions)
-    #     hour = int(total_time / 3600)
-    #     minute = int((total_time % 3600) / 60)
-    #     second = int(total_time % 60)
-    #     logger.debug(f"Total Time Cost: {hour}h {minute}m {second}s")
-        
-    #     save_path = os.path.join(save_dir, single_base_function.function_name + '.pkl')
-    #     logger.debug(f'Saving at {save_path}')
-    #     with open(save_path, 'wb') as f:
-    #         pickle.dump(single_base_function, f)

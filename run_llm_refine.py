@@ -22,9 +22,7 @@ def count_leading_spaces(s):
     return 0
 
 client = OpenAI(
-    # api_key="sk-fe4c3f17dfb24913ad5127e37a6acdc6",
-    api_key="sk-1130e9ff386e4d6ea9663a1099fdc13b",
-    # base_url="https://api.deepseek.com/beta",
+    api_key="",
     base_url="https://api.deepseek.com",
     
 )
